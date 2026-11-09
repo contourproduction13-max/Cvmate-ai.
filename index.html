@@ -52,12 +52,14 @@ footer{text-align:center;color:var(--muted);font-size:12px;padding:0 15px 28px}
   <article class="cv-paper" id="cvPaper"></article>
   <div class="no-print">
     <button class="btn primary" id="downloadBtn" type="button" style="width:100%">Download my CV for free (PDF)</button>
+    <p id="downloadHelp" class="hint" style="text-align:center;margin:10px 0 4px">Your PDF should download directly to your phone. If direct download is unavailable, we'll open the print option as a backup.</p>
     <div class="paybox"><h3>Want to make your CV even stronger?</h3><div class="price">₹129</div><p>Enhance your CV with stronger, job-specific wording and a more polished professional presentation. One-time payment.</p><button class="btn premium" id="enhanceBtn" type="button">Enhance my CV · ₹129</button><p style="margin-top:10px;font-size:11px">Premium checkout will be available once secure payments are connected.</p></div>
     <div class="actions"><button class="btn ghost" id="restartBtn" type="button" style="width:100%">Create another CV</button></div>
   </div>
 </section>
 </main>
 <footer> C V M a t e  A I · Free CV creation · Check your details before sharing your CV.</footer>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script>
 const answers={};
 let questions=[],index=0,job='';
@@ -130,7 +132,31 @@ function createCV(){
  $('review').classList.add('hidden');$('result').classList.remove('hidden');$('result').scrollIntoView({behavior:'smooth',block:'start'});
 }
 $('createBtn').addEventListener('click',createCV);
-$('downloadBtn').addEventListener('click',()=>window.print());
+async function downloadCV(){
+ const button=$('downloadBtn'),help=$('downloadHelp');
+ const fullName=answers.fullName||'My';
+ const safeName=fullName.normalize('NFKD').replace(/[^a-zA-Z0-9]+/g,'-').replace(/^-|-$/g,'')||'My';
+ button.disabled=true;button.textContent='Preparing your PDF…';
+ try{
+  if(!window.html2pdf) throw new Error('PDF library unavailable');
+  const element=$('cvPaper');
+  await window.html2pdf().set({
+   margin:[10,10,10,10],
+   filename:`${safeName}-CV.pdf`,
+   image:{type:'jpeg',quality:0.98},
+   html2canvas:{scale:2,useCORS:true,backgroundColor:'#ffffff',scrollY:0},
+   jsPDF:{unit:'mm',format:'a4',orientation:'portrait'},
+   pagebreak:{mode:['css','legacy']}
+  }).from(element).save();
+  help.textContent='Your CV PDF has been prepared. Check your phone’s Downloads folder.';
+ }catch(err){
+  help.textContent='Direct download was unavailable. In the print screen, choose Save as PDF, then save it to your phone.';
+  window.print();
+ }finally{
+  button.disabled=false;button.textContent='Download my CV for free (PDF)';
+ }
+}
+$('downloadBtn').addEventListener('click',downloadCV);
 $('enhanceBtn').addEventListener('click',()=>alert('CVMate AI Premium is planned at ₹129 as a one-time payment. Secure checkout and the AI enhancement service will be connected before launch. No payment has been taken.'));
 $('restartBtn').addEventListener('click',()=>{Object.keys(answers).forEach(k=>delete answers[k]);job='';questions=[];index=0;$('result').classList.add('hidden');$('wizard').classList.remove('hidden');$('progressBar').style.width='0';$('questionWrap').innerHTML=`<div class="q-kicker">First, your goal</div><h2 class="question">What job are you applying for?</h2><p class="hint">Type the job title. For example: Accountant, Delivery Executive, Sales Assistant, Driver, Teacher, Receptionist.</p><input id="jobInput" maxlength="90" placeholder="Enter the job title…" autocomplete="off"><div class="actions"><button class="btn primary" id="startBtn" type="button">Continue</button></div>`;$('jobInput').addEventListener('keydown',e=>{if(e.key==='Enter')start()});$('startBtn').addEventListener('click',start);$('jobInput').focus();window.scrollTo({top:0,behavior:'smooth'})});
 function pretty(s){return s.replace(/([A-Z])/g,' $1').replace(/^./,c=>c.toUpperCase())}
