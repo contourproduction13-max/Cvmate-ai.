@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#fff1f6">
+<title>AI CV Maker | CVMate AI</title>
+<meta name="description" content="Create a professional, job-specific CV for free with CVMate AI. Answer simple questions and download your CV as a PDF.">
+<style>
+:root{--pink:#e85d91;--pink-dark:#bd3f70;--pink-soft:#fff0f5;--pink-pale:#fff8fa;--ink:#29232a;--muted:#756b73;--line:#f0dce4;--white:#fff;--shadow:0 14px 38px rgba(147,67,99,.09)}
+*{box-sizing:border-box}body{margin:0;background:linear-gradient(180deg,#fff3f7 0,#fffafd 340px,#fff 100%);color:var(--ink);font:15px/1.55 system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif}
+header{padding:23px 18px 13px;text-align:center}.brand{font-weight:850;font-size:26px;letter-spacing:-1px;color:var(--pink-dark)}.brand span{color:#3a3037}.tag{font-size:12px;color:var(--muted);margin-top:2px}
+main{max-width:850px;margin:0 auto;padding:15px 16px 50px}.hero{text-align:center;margin:12px auto 22px;max-width:620px}.eyebrow{display:inline-block;background:#ffe1ec;color:#a63865;border-radius:999px;padding:5px 12px;font-size:11px;font-weight:750;letter-spacing:.08em;text-transform:uppercase}.hero h1{font-size:clamp(27px,6vw,40px);line-height:1.12;letter-spacing:-1.2px;margin:13px 0 9px}.hero p{color:var(--muted);margin:0}
+.card{background:var(--white);border:1px solid var(--line);border-radius:22px;box-shadow:var(--shadow);padding:clamp(18px,4vw,30px);max-width:660px;margin:0 auto}
+.topline{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:12px}.step-label{font-size:12px;color:var(--muted);font-weight:650}.progress{height:7px;background:#f8e7ee;border-radius:20px;overflow:hidden;margin:0 0 25px}.bar{height:100%;width:0;background:linear-gradient(90deg,#f49abc,#df4e85);border-radius:20px;transition:width .35s ease}
+.question-wrap{min-height:235px;animation:enter .28s ease}@keyframes enter{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+.q-kicker{color:var(--pink-dark);font-size:12px;font-weight:750;text-transform:uppercase;letter-spacing:.08em}.question{font-size:clamp(22px,4.8vw,29px);line-height:1.2;letter-spacing:-.6px;margin:8px 0 7px}.hint{color:var(--muted);font-size:13px;margin:0 0 20px}
+input,textarea,select{width:100%;border:1.5px solid #ead8e0;border-radius:13px;padding:15px 14px;font:inherit;font-size:16px;color:var(--ink);background:#fff;outline:none;transition:border .2s,box-shadow .2s}
+textarea{min-height:105px;resize:vertical}input:focus,textarea:focus,select:focus{border-color:var(--pink);box-shadow:0 0 0 4px #fce5ee}
+.options{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.option{border:1.5px solid var(--line);border-radius:13px;padding:13px;text-align:left;background:#fff;color:var(--ink);font:inherit;cursor:pointer}.option:active,.option:hover{border-color:var(--pink);background:var(--pink-pale)}.option.selected{border-color:var(--pink);background:#fff0f5;box-shadow:0 0 0 2px #f9d3e1 inset}
+.actions{display:flex;gap:10px;align-items:center;margin-top:20px}.btn{border:0;border-radius:13px;padding:13px 18px;font:inherit;font-weight:750;cursor:pointer}.primary{background:var(--pink);color:#fff;flex:1}.primary:hover{background:var(--pink-dark)}.ghost{background:#fff4f8;color:#9e4568;border:1px solid var(--line)}.skip{background:transparent;color:var(--muted);padding:10px 4px;font-weight:600}.btn:disabled{opacity:.45;cursor:not-allowed}
+.smallnote{text-align:center;color:var(--muted);font-size:12px;margin:16px 0 0}
+.hidden{display:none!important}
+.review h2,.result h2{margin:0 0 7px;font-size:25px}.review p,.result p{color:var(--muted);margin:0 0 18px}.summary-list{display:grid;gap:8px;margin:18px 0}.summary-item{background:#fff8fa;border:1px solid var(--line);border-radius:12px;padding:10px 12px;font-size:13px}.summary-item b{display:block;color:#8d3f60;margin-bottom:2px}
+.result{max-width:800px}.cv-paper{background:#fff;border:1px solid #eadfe4;border-radius:12px;padding:28px 30px;margin:20px auto;color:#252129;box-shadow:0 8px 25px rgba(0,0,0,.05);max-width:700px;min-height:500px}.cv-paper h1{font-size:27px;line-height:1.15;margin:0;color:#29232a}.cv-role{font-weight:750;color:#bd3f70;margin:5px 0}.cv-contact{font-size:12px;color:#645b62;border-bottom:2px solid #f1c9d8;padding-bottom:12px;margin-bottom:14px}.cv-paper h3{font-size:12px;letter-spacing:.09em;text-transform:uppercase;color:#bd3f70;margin:17px 0 5px;border-bottom:1px solid #f0dce4;padding-bottom:4px}.cv-paper p{margin:4px 0;color:#39323a;font-size:13px}.cv-paper ul{margin:5px 0;padding-left:19px;font-size:13px}.cv-paper li{margin:3px 0}
+.paybox{background:linear-gradient(145deg,#fff0f5,#fff9fb);border:1px solid #f3cad9;border-radius:17px;padding:19px;margin-top:17px;text-align:center}.paybox h3{margin:0;font-size:19px}.price{font-size:30px;font-weight:850;color:#bd3f70;margin:4px 0}.paybox p{font-size:13px;color:var(--muted);margin:0 0 13px}.premium{background:#30252c;color:#fff;width:100%}
+footer{text-align:center;color:var(--muted);font-size:12px;padding:0 15px 28px}
+@media(max-width:520px){.options{grid-template-columns:1fr}.card{border-radius:18px}.question-wrap{min-height:245px}.actions{flex-wrap:wrap}.actions .primary{min-width:100%}.cv-paper{padding:21px 18px}}
+@media print{body{background:#fff}.no-print,header,.hero,footer{display:none!important}main{padding:0;max-width:none}.card{border:0;box-shadow:none;padding:0;max-width:none}.cv-paper{border:0;box-shadow:none;margin:0;max-width:none;padding:0;border-radius:0}.result-head,.paybox{display:none!important}.cv-paper h1{font-size:22pt}}
+</style>
+</head>
+<body>
+<header><div class="brand">CV<span>Mate</span> AI</div><div class="tag">A smarter way to make your next move</div></header>
+<main>
+<section class="hero no-print"><span class="eyebrow">AI CV MAKER</span><h1>Your experience. Your next opportunity.</h1><p>Enter the job you want. Then answer standard CV questions that work for every profession.</p></section>
+<section class="card no-print" id="wizard">
+  <div class="topline"><span class="step-label" id="stepLabel">Let's get started</span><span class="step-label" id="stepCount">Step 1</span></div>
+  <div class="progress"><div class="bar" id="progressBar"></div></div>
+  <div class="question-wrap" id="questionWrap">
+    <div class="q-kicker">First, your goal</div><h2 class="question">What job are you applying for?</h2><p class="hint">Type the job title. For example: Accountant, Delivery Executive, Sales Assistant, Driver, Teacher, Receptionist.</p>
+    <input id="jobInput" maxlength="90" placeholder="Enter the job title…" autocomplete="off">
+    <div class="actions"><button class="btn primary" id="startBtn" type="button">Continue</button></div>
+  </div>
+  <p class="smallnote">One question at a time · Skip anything you don't want to answer</p>
+</section>
+<section class="card no-print hidden" id="review">
+  <div class="review"><span class="eyebrow">Almost there</span><h2>Ready to create your CV?</h2><p>Check your answers. You can go back and change anything before we create your CV.</p><div class="summary-list" id="answerSummary"></div>
+  <div class="actions"><button class="btn ghost" id="editBtn" type="button">Edit answers</button><button class="btn primary" id="createBtn" type="button">Create my CV</button></div></div>
+</section>
+<section class="card result hidden" id="result">
+  <div class="result-head no-print"><span class="eyebrow">Your CV is ready</span><h2 id="resultTitle">Your professional CV</h2><p>Review your details carefully. Your free CV is ready to download.</p></div>
+  <article class="cv-paper" id="cvPaper"></article>
+  <div class="no-print">
+    <button class="btn primary" id="downloadBtn" type="button" style="width:100%">Download my CV for free (PDF)</button>
+    <div class="paybox"><h3>Want to make your CV even stronger?</h3><div class="price">₹129</div><p>Enhance your CV with stronger, job-specific wording and a more polished professional presentation. One-time payment.</p><button class="btn premium" id="enhanceBtn" type="button">Enhance my CV · ₹129</button><p style="margin-top:10px;font-size:11px">Premium checkout will be available once secure payments are connected.</p></div>
+    <div class="actions"><button class="btn ghost" id="restartBtn" type="button" style="width:100%">Create another CV</button></div>
+  </div>
+</section>
+</main>
+<footer> C V M a t e  A I · Free CV creation · Check your details before sharing your CV.</footer>
+<script>
+const answers={};
+let questions=[],index=0,job='';
+const $=id=>document.getElementById(id);
+function makeQuestions(){
+ return [
+  {key:'fullName',label:'What is your full name?',hint:'Enter your name as you want it to appear on your CV.',type:'text',placeholder:'Full name'},
+  {key:'phone',label:'What phone number can employers reach you on?',hint:'Use a number you are comfortable sharing with employers.',type:'tel',placeholder:'Phone number'},
+  {key:'email',label:'What is your email address?',hint:'You can skip this if you do not use email.',type:'email',placeholder:'Email address'},
+  {key:'location',label:'Where are you based?',hint:'City, state or area is enough.',type:'text',placeholder:'e.g. Namchi, Sikkim'},
+  {key:'summary',label:'Write a short professional introduction',hint:'Tell employers about yourself, your strengths and the kind of work you can do. You may skip this.',type:'textarea',placeholder:'I am a motivated and reliable person with…'},
+  {key:'workHistory',label:'Tell us about your work experience',hint:'Include job title, company or organisation, dates and your main duties. If you are a fresher, write Fresher or skip.',type:'textarea',placeholder:'Job title – Company – Dates\\nMain duties and responsibilities…'},
+  {key:'education',label:'What is your highest education or qualification?',hint:'Include your course, stream or qualification.',type:'text',placeholder:'e.g. Class 12 Commerce, BA, Diploma…'},
+  {key:'institution',label:'Where did you study or train?',hint:'School, college or training centre.',type:'text',placeholder:'Institution name and year'},
+  {key:'skillsGeneral',label:'What are your key skills?',hint:'Include practical, technical and personal skills relevant to the job.',type:'textarea',placeholder:'Communication, teamwork, MS Excel, customer service…'},
+  {key:'projects',label:'Have you completed any projects or practical work?',hint:'Include college projects, freelance work, volunteering, family business or personal projects.',type:'textarea',placeholder:'Project name and what you did…'},
+  {key:'achievements',label:'Have you achieved anything worth highlighting?',hint:'Awards, targets reached, certificates, appreciation or personal milestones. Small achievements count.',type:'textarea',placeholder:'Achievements, awards or certificates…'},
+  {key:'certifications',label:'Do you have any certificates or professional training?',hint:'Add the name of the course, certificate or training provider.',type:'textarea',placeholder:'Certificate or training details…'},
+  {key:'languages',label:'Which languages do you speak or write?',hint:'You can include proficiency, for example Hindi (fluent), English (basic).',type:'text',placeholder:'Hindi, English, Nepali…'},
+  {key:'availability',label:'When could you start work?',hint:'Optional information for employers.',type:'select',options:['Immediately','Within 1 week','Within 2 weeks','Within 1 month','Negotiable']}
+ ];
+}
+function start(){job=$('jobInput').value.trim();if(!job){$('jobInput').focus();return}questions=makeQuestions();index=0;renderQuestion();$('wizard').classList.remove('hidden');}
+$('startBtn').addEventListener('click',start);$('jobInput').addEventListener('keydown',e=>{if(e.key==='Enter')start()});
+function renderQuestion(){
+ const q=questions[index],wrap=$('questionWrap');
+ $('stepLabel').textContent='Building your '+job+' CV';$('stepCount').textContent=`Step ${index+1} of ${questions.length}`;
+ $('progressBar').style.width=`${(index/questions.length)*100}%`;
+ wrap.style.animation='none';void wrap.offsetWidth;wrap.style.animation='enter .28s ease';
+ let field='';
+ if(q.type==='textarea')field=`<textarea id="answerField" placeholder="${esc(q.placeholder||'')}">${esc(answers[q.key]||'')}</textarea>`;
+ else if(q.type==='select')field=`<div class="options">${q.options.map(o=>`<button type="button" class="option ${answers[q.key]===o?'selected':''}" data-choice="${esc(o)}">${esc(o)}</button>`).join('')}</div>`;
+ else field=`<input id="answerField" type="${q.type}" maxlength="1000" placeholder="${esc(q.placeholder||'')}" value="${esc(answers[q.key]||'')}">`;
+ wrap.innerHTML=`<div class="q-kicker">Your CV details</div><h2 class="question">${esc(q.label)}</h2><p class="hint">${esc(q.hint||'')}</p>${field}<p id="fieldError" class="hint" style="color:#bd3f70;display:none;margin-top:8px">Please enter an answer, or choose Skip to continue.</p><div class="actions"><button class="btn ghost" id="backBtn" type="button" ${index===0?'disabled':''}>Back</button><button class="btn primary" id="nextBtn" type="button">${index===questions.length-1?'Review answers':'Continue'}</button><button class="btn skip" id="skipBtn" type="button">Skip</button></div>`;
+ wrap.querySelectorAll('[data-choice]').forEach(b=>b.addEventListener('click',()=>{answers[q.key]=b.dataset.choice;next()}));
+ $('nextBtn').addEventListener('click',next);
+ $('skipBtn').addEventListener('click',()=>{delete answers[q.key];advance()});
+ $('backBtn').addEventListener('click',()=>{if(index>0){saveCurrent();index--;renderQuestion()}});
+ const f=$('answerField');
+ if(f)f.addEventListener('keydown',e=>{if(e.key==='Enter'&&q.type!=='textarea'){e.preventDefault();next()}});
+}
+function saveCurrent(){
+ const q=questions[index],f=$('answerField');
+ if(f){const v=f.value.trim();if(v)answers[q.key]=v;else delete answers[q.key]}
+}
+function advance(){if(index<questions.length-1){index++;renderQuestion()}else showReview()}
+function next(){saveCurrent();advance()}
+function showReview(){
+ $('wizard').classList.add('hidden');$('review').classList.remove('hidden');$('progressBar').style.width='100%';
+ const labels={fullName:'Name',phone:'Phone',email:'Email',location:'Location',summary:'Professional introduction',workHistory:'Work experience',education:'Education',institution:'Institution / year',skillsGeneral:'Key skills',projects:'Projects / practical work',achievements:'Achievements',certifications:'Certificates / training',languages:'Languages',availability:'Availability'};
+ $('answerSummary').innerHTML=`<div class="summary-item"><b>Target job</b>${esc(job)}</div>`+Object.entries(answers).filter(([k,v])=>v).map(([k,v])=>`<div class="summary-item"><b>${esc(labels[k]||pretty(k))}</b>${esc(v)}</div>`).join('');
+}
+$('editBtn').addEventListener('click',()=>{$('review').classList.add('hidden');$('wizard').classList.remove('hidden');index=0;renderQuestion()});
+function createCV(){
+ const a=answers;const name=a.fullName||'Your Name';const role=job;
+ const contact=[a.location,a.phone,a.email].filter(Boolean).join(' · ');
+ let summary=a.summary||`${name} is seeking an opportunity as a ${role}. A motivated candidate with strengths in ${a.skillsGeneral||'communication, teamwork and reliability'}.`;
+ const sections=[];
+ function section(title,content){if(content)sections.push(`<h3>${esc(title)}</h3>${content}`)}
+ section('Professional Profile',`<p>${esc(summary)}</p>`);
+ section('Work Experience',a.workHistory?`<p>${esc(a.workHistory).replace(/\n/g,'<br>')}</p>`:'');
+ section('Projects & Practical Work',a.projects?`<p>${esc(a.projects).replace(/\n/g,'<br>')}</p>`:'');
+ section('Certificates & Training',a.certifications?`<p>${esc(a.certifications).replace(/\n/g,'<br>')}</p>`:'');
+ section('Education & Training',[a.education,a.institution].filter(Boolean).map(esc).map(x=>`<p>${x}</p>`).join(''));
+ const skills=[a.skillsGeneral].filter(Boolean).join(', ');
+ section('Key Skills',skills?`<p>${esc(skills)}</p>`:'');
+ section('Achievements',a.achievements?`<p>${esc(a.achievements)}</p>`:'');
+ section('Languages',a.languages?`<p>${esc(a.languages)}</p>`:'');
+ $('cvPaper').innerHTML=`<h1>${esc(name)}</h1><div class="cv-role">${esc(role)}</div><div class="cv-contact">${esc(contact)}</div>${sections.join('')}`;
+ $('review').classList.add('hidden');$('result').classList.remove('hidden');$('result').scrollIntoView({behavior:'smooth',block:'start'});
+}
+$('createBtn').addEventListener('click',createCV);
+$('downloadBtn').addEventListener('click',()=>window.print());
+$('enhanceBtn').addEventListener('click',()=>alert('CVMate AI Premium is planned at ₹129 as a one-time payment. Secure checkout and the AI enhancement service will be connected before launch. No payment has been taken.'));
+$('restartBtn').addEventListener('click',()=>{Object.keys(answers).forEach(k=>delete answers[k]);job='';questions=[];index=0;$('result').classList.add('hidden');$('wizard').classList.remove('hidden');$('progressBar').style.width='0';$('questionWrap').innerHTML=`<div class="q-kicker">First, your goal</div><h2 class="question">What job are you applying for?</h2><p class="hint">Type the job title. For example: Accountant, Delivery Executive, Sales Assistant, Driver, Teacher, Receptionist.</p><input id="jobInput" maxlength="90" placeholder="Enter the job title…" autocomplete="off"><div class="actions"><button class="btn primary" id="startBtn" type="button">Continue</button></div>`;$('jobInput').addEventListener('keydown',e=>{if(e.key==='Enter')start()});$('startBtn').addEventListener('click',start);$('jobInput').focus();window.scrollTo({top:0,behavior:'smooth'})});
+function pretty(s){return s.replace(/([A-Z])/g,' $1').replace(/^./,c=>c.toUpperCase())}
+function esc(s){return String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+</script>
+</body></html>
